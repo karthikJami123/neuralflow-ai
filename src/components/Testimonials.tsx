@@ -33,7 +33,7 @@ export const Testimonials = () => {
 
   const testimonialsList: Testimonial[] = [
     {
-      quote: "NeuralFlow AI cut our database integration times from weeks to under ten minutes. The cognitive schema self-repair feels like actual magic.",
+      quote: "SynapseFlow AI cut our database integration times from weeks to under ten minutes. The cognitive schema self-repair feels like actual magic.",
       name: "Marcus Vance",
       role: "VP of Engineering",
       company: "DataPulse Systems",
@@ -63,7 +63,7 @@ export const Testimonials = () => {
           Trusted by High-Performance Teams
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-[#D9E8E2]">
-          See how engineers and architecture leads leverage NeuralFlow AI to simplify pipeline operational burdens.
+          See how engineers and architecture leads leverage SynapseFlow AI to simplify pipeline operational burdens.
         </p>
       </div>
 

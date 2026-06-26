@@ -23,7 +23,7 @@ export const Header = () => {
         <a 
           href="/" 
           className="flex items-center gap-2 font-mono text-xl font-bold tracking-tight text-[#F1F6F4] focus:outline-none"
-          aria-label="NeuralFlow AI Home"
+          aria-label="SynapseFlow AI Home"
         >
           <svg
             className="h-7 w-7 text-[#FFC801] animate-pulse"
@@ -40,7 +40,7 @@ export const Header = () => {
             />
           </svg>
           <span className="font-mono tracking-tight text-[#F1F6F4]">
-            NeuralFlow<span className="text-[#FFC801] font-extrabold">AI</span>
+            SynapseFlow<span className="text-[#FFC801] font-extrabold">AI</span>
           </span>
         </a>
 

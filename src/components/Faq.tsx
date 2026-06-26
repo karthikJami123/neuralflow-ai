@@ -15,8 +15,8 @@ export const Faq = () => {
 
   const faqData: FaqItem[] = [
     {
-      question: "How does NeuralFlow AI handle real-time data streams?",
-      answer: "NeuralFlow AI processes high-throughput real-time streams using a sub-millisecond serialization engine that handles payloads with structural validation on input hooks."
+      question: "How does SynapseFlow AI handle real-time data streams?",
+      answer: "SynapseFlow AI processes high-throughput real-time streams using a sub-millisecond serialization engine that handles payloads with structural validation on input hooks."
     },
     {
       question: "What currencies and billing cycles are supported?",
@@ -31,7 +31,7 @@ export const Faq = () => {
       answer: "Absolutely. You can dynamically adjust your plan tier or transition from monthly to annual billing cycles at any time."
     },
     {
-      question: "What frameworks and languages does NeuralFlow AI support?",
+      question: "What frameworks and languages does SynapseFlow AI support?",
       answer: "We offer native SDK libraries for Node.js, Go, Python, and Rust, alongside standard JSON webhooks for serverless and cloud service integrations."
     }
   ];

@@ -27,7 +27,7 @@ export const Hero = () => {
         {/* Banner Announcement */}
         <div className="mb-6 flex items-center gap-2 rounded-lg border border-[#FFC801]/30 bg-[#FFC801]/10 px-4 py-1.5 text-xs font-semibold text-[#FFC801] backdrop-blur-md">
           <span className="flex h-2 w-2 rounded-full bg-[#FFC801] animate-ping" />
-          NeuralFlow AI v2.0 is now live
+          SynapseFlow AI v2.0 is now live
         </div>
 
         {/* Hero Title (Single H1 - JetBrains Mono) */}
@@ -78,7 +78,7 @@ export const Hero = () => {
             <pre className="overflow-x-auto font-mono text-xs sm:text-sm text-[#D9E8E2] leading-relaxed p-2">
               <code>
 {`{
-  "platform": "NeuralFlow AI",
+  "platform": "SynapseFlow AI",
   "pipeline": "enterprise-data-stream",
   "status": "active",
   "cognitive_mapping": {

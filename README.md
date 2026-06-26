@@ -1,9 +1,9 @@
-# NeuralFlow AI - Advanced Real-Time Data Automation Platform
+# SynapseFlow AI - Advanced Real-Time Data Automation Platform
 
-NeuralFlow AI is a premium, developer-first SaaS landing page demonstrating a real-time data automation platform. Built with a high-fidelity obsidian dark theme, custom glowing gradients, and smooth native micro-animations.
+SynapseFlow AI is a premium, developer-first SaaS landing page demonstrating a real-time data automation platform. Built with a high-fidelity obsidian dark theme, custom glowing gradients, and smooth native micro-animations.
 
 ## 🚀 Live Demo
-Live Deployment: [NeuralFlow AI Live on Vercel](YOUR_LIVE_VERCEL_LINK_HERE)
+Live Deployment: [SynapseFlow AI Live on Vercel](YOUR_LIVE_VERCEL_LINK_HERE)
 
 ---
 
@@ -41,7 +41,7 @@ Make sure you have Node.js installed.
 ### Installation
 1. Clone the repository and navigate to the directory:
    ```bash
-   cd neuralflow-ai
+   cd synapseflow-ai
    ```
 2. Install dependencies:
    ```bash

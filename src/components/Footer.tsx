@@ -8,7 +8,7 @@ export const Footer = () => {
             <a 
               href="/" 
               className="flex items-center gap-2 font-mono text-xl font-bold tracking-tight text-[#F1F6F4] focus:outline-none"
-              aria-label="NeuralFlow AI Home"
+              aria-label="SynapseFlow AI Home"
             >
               <svg
                 className="h-6 w-6 text-[#FFC801]"
@@ -24,7 +24,7 @@ export const Footer = () => {
                   d="M13 10V3L4 14h7v7l9-11h-7z"
                 />
               </svg>
-              <span>NeuralFlow<span className="text-[#FFC801] font-extrabold">AI</span></span>
+              <span>SynapseFlow<span className="text-[#FFC801] font-extrabold">AI</span></span>
             </a>
             <p className="max-w-xs text-sm leading-relaxed text-[#D9E8E2]">
               Premium AI-driven data automation platform. Stream, parse, clean, and synchronize datasets in real-time.
@@ -65,7 +65,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-8 md:flex-row">
           <p className="text-xs text-[#D9E8E2]">
-            &copy; {new Date().getFullYear()} NeuralFlow AI Inc. All rights reserved.
+            &copy; {new Date().getFullYear()} SynapseFlow AI Inc. All rights reserved.
           </p>
           
           <div className="flex gap-4">
