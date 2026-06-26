@@ -35,10 +35,10 @@ export const Testimonials = () => {
     <section id="testimonials" className="mx-auto max-w-7xl px-6 py-24 border-t border-white/5">
       {/* Section Header */}
       <div className="mb-16 text-center">
-        <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-5xl">
+        <h2 className="font-mono text-3xl font-bold tracking-tight text-[#F1F6F4] sm:text-5xl">
           Trusted by High-Performance Teams
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
+        <p className="mx-auto mt-4 max-w-2xl text-lg text-[#D9E8E2]">
           See how engineers and architecture leads leverage NeuralFlow AI to simplify pipeline operational burdens.
         </p>
       </div>
@@ -48,24 +48,24 @@ export const Testimonials = () => {
         {testimonialsList.map((t, idx) => (
           <article 
             key={idx} 
-            className="glow-card flex flex-col justify-between p-8 rounded-2xl border border-white/10 bg-black/40"
+            className="brand-card flex flex-col justify-between p-8 rounded-xl border border-white/5 bg-[#114C5A] transition-all duration-[150ms] ease-out hover:border-[#FFC801]"
           >
             {/* Quote */}
-            <p className="text-base leading-relaxed text-text-primary italic mb-8">
+            <p className="text-base leading-relaxed text-[#D9E8E2] italic mb-8">
               &ldquo;{t.quote}&rdquo;
             </p>
 
             {/* Author details */}
             <div className="flex items-center gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-sm font-bold text-primary font-display" aria-hidden="true">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#FFC801]/10 border border-[#FFC801]/20 text-sm font-bold text-[#FFC801] font-mono" aria-hidden="true">
                 {t.avatar}
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-white">
+                <h4 className="text-sm font-semibold text-[#F1F6F4] font-mono">
                   {t.name}
-                </h3>
-                <p className="text-xs text-text-secondary">
-                  {t.role}, <span className="text-primary font-medium">{t.company}</span>
+                </h4>
+                <p className="text-xs text-[#D9E8E2]">
+                  {t.role}, <span className="text-[#FFC801] font-medium">{t.company}</span>
                 </p>
               </div>
             </div>

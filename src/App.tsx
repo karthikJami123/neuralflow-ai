@@ -7,7 +7,7 @@ import { Footer } from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-[#030014] text-text-primary selection:bg-primary/30 selection:text-white">
+    <div className="min-h-screen bg-bg text-[#D9E8E2] selection:bg-[#FFC801]/30 selection:text-[#F1F6F4]">
       {/* Semantic top-level layout wrapper */}
       <Header />
       

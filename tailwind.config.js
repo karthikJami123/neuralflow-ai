@@ -7,17 +7,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: 'var(--color-bg)',
-        card: 'var(--color-card)',
-        primary: 'var(--color-primary)',
-        secondary: 'var(--color-secondary)',
-        accent: 'var(--color-accent)',
-        'text-primary': 'var(--color-text-primary)',
-        'text-secondary': 'var(--color-text-secondary)',
+        bg: '#172B36',
+        'alt-bg': '#114C5A',
+        primary: '#FFC801',
+        secondary: '#FF9932',
+        'text-heading': '#F1F6F4',
+        'text-body': '#D9E8E2',
       },
       fontFamily: {
-        sans: 'var(--font-sans)',
-        display: 'var(--font-display)',
+        mono: ['"JetBrains Mono"', 'monospace'],
+        sans: ['"Inter"', 'sans-serif'],
       },
     },
   },
