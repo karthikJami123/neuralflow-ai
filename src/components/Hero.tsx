@@ -47,7 +47,7 @@ export const Hero = () => {
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a
             href="#pricing"
-            className="group relative flex items-center justify-center gap-2 rounded-lg bg-[#FFC801] px-8 py-4 text-base font-semibold text-[#172B36] transition-all duration-150 ease-out hover:bg-[#FF9932] hover:scale-[1.02] active:scale-[0.98]"
+            className="group relative flex items-center justify-center gap-2 rounded-lg bg-[#FFC801] animate-cta-pulse px-8 py-4 text-base font-semibold text-[#172B36] transition-all duration-150 ease-out hover:bg-[#FF9932] hover:scale-[1.02] active:scale-[0.98]"
           >
             Start Free Integration
             {/* Inline SVG component as Hero CTA */}

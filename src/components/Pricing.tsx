@@ -215,7 +215,7 @@ export const Pricing = () => {
       {/* Pricing Cards Grid */}
       <div className="grid grid-cols-1 gap-8 md:grid-cols-3 items-stretch">
         {/* Tier 1: Starter */}
-        <article className="brand-card flex flex-col justify-between p-8 rounded-xl border border-white/10 bg-[#114C5A]">
+        <article className="brand-card pricing-card flex flex-col justify-between p-8 rounded-xl border border-white/10 bg-[#114C5A]">
           <div>
             <h3 className="font-mono text-lg font-semibold text-[#F1F6F4]">Starter</h3>
             <p className="mt-2 text-xs text-[#D9E8E2]">Perfect for developer sandboxes and prototype workflows.</p>
@@ -269,7 +269,7 @@ export const Pricing = () => {
         </article>
 
         {/* Tier 2: Pro (Featured) */}
-        <article className="brand-card relative flex flex-col justify-between p-8 rounded-xl border border-[#FFC801] bg-[#114C5A]/80 shadow-xl shadow-[#FFC801]/5">
+        <article className="brand-card pricing-card pro-card-glow relative flex flex-col justify-between p-8 rounded-xl border border-[#FFC801] bg-[#114C5A]/80 shadow-xl">
           <div className="absolute top-0 right-8 -translate-y-[50%] rounded-full bg-[#FFC801] px-3.5 py-1 text-[10px] font-bold text-[#172B36] uppercase tracking-wider">
             Most Popular
           </div>
@@ -332,7 +332,7 @@ export const Pricing = () => {
         </article>
 
         {/* Tier 3: Enterprise */}
-        <article className="brand-card flex flex-col justify-between p-8 rounded-xl border border-white/10 bg-[#114C5A]">
+        <article className="brand-card pricing-card flex flex-col justify-between p-8 rounded-xl border border-white/10 bg-[#114C5A]">
           <div>
             <h3 className="font-mono text-lg font-semibold text-[#F1F6F4]">Enterprise</h3>
             <p className="mt-2 text-xs text-[#D9E8E2]">Customized deployments needing end-to-end security enclaves.</p>

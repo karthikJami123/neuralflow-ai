@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 80);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#172B36]/90 backdrop-blur-md transition-all duration-150">
+    <header className={`sticky top-0 z-50 w-full border-b transition-all duration-[200ms] ease-out ${
+      isScrolled 
+        ? 'bg-[#172B36]/90 backdrop-blur-[10px] border-white/5 shadow-lg' 
+        : 'bg-transparent border-transparent'
+    }`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo Section */}
         <a 
