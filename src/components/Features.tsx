@@ -6,8 +6,7 @@ import {
   LinkIcon, 
   SearchIcon, 
   ArrowPath, 
-  ChevronDown, 
-  ChevronUp 
+  ChevronDown 
 } from './Icons';
 
 interface FeatureItem {
@@ -143,7 +142,7 @@ export const Features = () => {
       title: 'Real-Time Outlier Alerting',
       badge: 'Anomaly Detection',
       description: 'Stream cleaning engines flag logical structural inconsistencies and statistical outliers.',
-      icon: (className) => <LinkIcon className={className} />,
+      icon: (className) => <SearchIcon className={className} />,
       graphic: (
         <div className="relative flex h-28 w-full items-center justify-center rounded bg-black/40 border border-white/5">
           <svg className="w-full h-full p-2 text-white/20 stroke-current" viewBox="0 0 200 80" fill="none" strokeWidth="1.5">
@@ -163,7 +162,7 @@ export const Features = () => {
       title: 'Semantic Entity Resolution',
       badge: 'De-Duplication',
       description: 'Deduplicate consumer and business entities by combining vector embeddings with fuzzy-logic.',
-      icon: (className) => <SearchIcon className={className} />,
+      icon: (className) => <LinkIcon className={className} />,
       graphic: (
         <div className="relative flex h-28 w-full items-center justify-center rounded bg-black/40 border border-white/5 p-2">
           <div className="flex items-center gap-3 w-full max-w-[80%] font-mono text-[9px]">
@@ -241,11 +240,7 @@ export const Features = () => {
                       {feature.title}
                     </h3>
                   </div>
-                  {isOpen ? (
-                    <ChevronUp className="h-5 w-5 text-[#FFC801]" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5 text-[#D9E8E2]" />
-                  )}
+                  <ChevronDown className={`h-5 w-5 transition-transform duration-[350ms] ease-in-out ${isOpen ? 'rotate-180 text-[#FFC801]' : 'text-[#D9E8E2]'}`} />
                 </button>
 
                 {/* Accordion Body using Pure CSS Grid transition (350ms duration) */}
