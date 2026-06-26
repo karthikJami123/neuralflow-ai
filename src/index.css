@@ -90,16 +90,115 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Pricing cards hover: transform: translateY(-4px) on hover, 150ms ease-out */
+/* Pricing cards entrance animation */
 .pricing-card {
-  transition: transform 150ms ease-out, border-color 150ms ease-out, box-shadow 150ms ease-out !important;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 400ms ease-out, transform 400ms ease-out, border-color 150ms ease-out, box-shadow 150ms ease-out;
 }
-.pricing-card:hover {
+
+.pricing-cards-visible .pricing-card:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+.pricing-cards-visible .pricing-card:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 100ms;
+}
+.pricing-cards-visible .pricing-card:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 200ms;
+}
+
+/* Post-entrance ready state for hover interactions */
+.pricing-card.pricing-card-ready {
+  transition: transform 150ms ease-out, border-color 150ms ease-out, box-shadow 150ms ease-out !important;
+  transition-delay: 0ms !important;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pricing-card.pricing-card-ready:hover {
   transform: translateY(-4px) !important;
 }
 
 /* Pro pricing card permanent glow */
 .pro-card-glow {
   box-shadow: 0 0 15px rgba(255, 200, 1, 0.25) !important;
+}
+
+/* Price flip keyframes and styles */
+@keyframes priceOut {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+@keyframes priceIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.price-exit {
+  animation: priceOut 75ms ease-out forwards;
+}
+.price-enter {
+  animation: priceIn 75ms ease-out forwards;
+}
+
+/* Testimonial cards entrance animation */
+.testimonial-card {
+  opacity: 0;
+  transition: opacity 400ms ease-out, transform 400ms ease-out, border-color 150ms ease-out, box-shadow 150ms ease-out;
+}
+
+.testimonial-card-left {
+  transform: translateX(-30px);
+}
+.testimonial-card-center {
+  transform: translateY(20px);
+}
+.testimonial-card-right {
+  transform: translateX(30px);
+}
+
+.testimonials-visible .testimonial-card-left {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0ms;
+}
+.testimonials-visible .testimonial-card-center {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 100ms;
+}
+.testimonials-visible .testimonial-card-right {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 200ms;
+}
+
+/* Post-entrance ready state for hover interactions */
+.testimonial-card.testimonial-card-ready {
+  transition: transform 150ms ease-out, border-color 150ms ease-out, box-shadow 150ms ease-out !important;
+  transition-delay: 0ms !important;
+  opacity: 1;
+  transform: translate(0) !important;
+}
+
+.testimonial-card.testimonial-card-ready:hover {
+  transform: translateY(-4px) !important;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 20px rgba(255, 200, 1, 0.08) !important;
 }
 
 /* Bento cards hover: SVG icon scales to 1.1 on hover, 150ms ease-out */

@@ -58,8 +58,15 @@ export const Pricing = () => {
   const btnInrRef = useRef<HTMLButtonElement>(null);
   const btnEurRef = useRef<HTMLButtonElement>(null);
 
+  // DOM refs for sliding highlights
+  const billingPillRef = useRef<HTMLDivElement>(null);
+  const currencyPillRef = useRef<HTMLDivElement>(null);
+
+  // Section ref for scroll entrance
+  const pricingSectionRef = useRef<HTMLDivElement>(null);
+
   // Compute and inject values
-  const updatePricingDOM = () => {
+  const updatePricingDOM = (animate = false) => {
     const billing = billingCycleRef.current;
     const currency = currencyRef.current;
     
@@ -73,16 +80,28 @@ export const Pricing = () => {
     const proRate = Math.round(PRICING_MATRIX.tiers.pro.base * currencyInfo.rate * multiplier);
     const enterpriseRate = Math.round(PRICING_MATRIX.tiers.enterprise.base * currencyInfo.rate * multiplier);
 
-    // Apply directly to text nodes (isolated, zero React component re-renders)
-    if (starterPriceRef.current) {
-      starterPriceRef.current.textContent = `${currencyInfo.symbol}${starterRate}`;
-    }
-    if (proPriceRef.current) {
-      proPriceRef.current.textContent = `${currencyInfo.symbol}${proRate}`;
-    }
-    if (enterprisePriceRef.current) {
-      enterprisePriceRef.current.textContent = `${currencyInfo.symbol}${enterpriseRate}`;
-    }
+    const updateNode = (ref: React.RefObject<HTMLSpanElement | null>, text: string) => {
+      const el = ref.current;
+      if (!el) return;
+      if (animate) {
+        el.classList.add('price-exit');
+        el.classList.remove('price-enter');
+        setTimeout(() => {
+          el.textContent = text;
+          el.classList.remove('price-exit');
+          el.classList.add('price-enter');
+          setTimeout(() => {
+            el.classList.remove('price-enter');
+          }, 75);
+        }, 75);
+      } else {
+        el.textContent = text;
+      }
+    };
+
+    updateNode(starterPriceRef, `${currencyInfo.symbol}${starterRate}`);
+    updateNode(proPriceRef, `${currencyInfo.symbol}${proRate}`);
+    updateNode(enterprisePriceRef, `${currencyInfo.symbol}${enterpriseRate}`);
 
     // Apply period label updates
     if (starterPeriodLabelRef.current) starterPeriodLabelRef.current.textContent = periodText;
@@ -94,8 +113,17 @@ export const Pricing = () => {
     if (billingCycleRef.current === cycle) return;
     billingCycleRef.current = cycle;
 
-    // Apply micro-interaction classes directly (150ms transitions)
-    const activeClasses = ['bg-[#FFC801]', 'text-[#172B36]'];
+    // Apply sliding transform directly to billing pill
+    if (billingPillRef.current) {
+      if (cycle === 'monthly') {
+        billingPillRef.current.style.transform = 'translateX(0)';
+      } else {
+        billingPillRef.current.style.transform = 'translateX(100%)';
+      }
+    }
+
+    // Toggle active/inactive text colors on buttons
+    const activeClasses = ['text-[#172B36]'];
     const inactiveClasses = ['text-[#D9E8E2]', 'hover:text-[#F1F6F4]'];
 
     if (cycle === 'monthly') {
@@ -112,12 +140,23 @@ export const Pricing = () => {
       inactiveClasses.forEach(c => btnMonthlyRef.current?.classList.add(c));
     }
 
-    updatePricingDOM();
+    updatePricingDOM(true);
   };
 
   const handleCurrencyToggle = (currency: 'USD' | 'INR' | 'EUR') => {
     if (currencyRef.current === currency) return;
     currencyRef.current = currency;
+
+    // Apply sliding transform directly to currency pill
+    if (currencyPillRef.current) {
+      if (currency === 'USD') {
+        currencyPillRef.current.style.transform = 'translateX(0)';
+      } else if (currency === 'INR') {
+        currencyPillRef.current.style.transform = 'translateX(100%)';
+      } else {
+        currencyPillRef.current.style.transform = 'translateX(200%)';
+      }
+    }
 
     const btns = {
       USD: btnUsdRef.current,
@@ -125,8 +164,8 @@ export const Pricing = () => {
       EUR: btnEurRef.current,
     };
 
-    const activeClasses = ['bg-[#FFC801]/10', 'text-[#FFC801]', 'border-[#FFC801]/30'];
-    const inactiveClasses = ['text-[#D9E8E2]', 'hover:text-[#F1F6F4]', 'border-transparent'];
+    const activeClasses = ['text-[#FFC801]'];
+    const inactiveClasses = ['text-[#D9E8E2]', 'hover:text-[#F1F6F4]'];
 
     Object.entries(btns).forEach(([key, btn]) => {
       if (!btn) return;
@@ -139,16 +178,36 @@ export const Pricing = () => {
       }
     });
 
-    updatePricingDOM();
+    updatePricingDOM(true);
   };
 
-  // Perform initial calculation on mount
+  // Perform initial calculation and register intersection observer on mount
   useEffect(() => {
-    updatePricingDOM();
+    updatePricingDOM(false);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          pricingSectionRef.current?.classList.add('pricing-cards-visible');
+          setTimeout(() => {
+            const cards = pricingSectionRef.current?.querySelectorAll('.pricing-card');
+            cards?.forEach(card => card.classList.add('pricing-card-ready'));
+          }, 600); // 200ms delay + 400ms duration
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (pricingSectionRef.current) {
+      observer.observe(pricingSectionRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section id="pricing" className="mx-auto max-w-7xl px-6 py-24 relative">
+    <section id="pricing" ref={pricingSectionRef} className="mx-auto max-w-7xl px-6 py-24 relative">
       <div className="absolute top-[10%] left-[50%] -translate-x-[50%] -z-10 h-[40rem] w-[40rem] rounded-full bg-[#FFC801]/5 blur-[120px] pointer-events-none" aria-hidden="true" />
       
       {/* Section Header */}
@@ -163,12 +222,18 @@ export const Pricing = () => {
         {/* Switchers Container */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6">
           {/* Billing Switcher (150ms transitions) */}
-          <div className="flex rounded-lg border border-white/5 bg-[#114C5A] p-1">
+          <div className="relative flex rounded-lg border border-white/5 bg-[#114C5A] p-1 w-80 sm:w-96 overflow-hidden">
+            {/* Sliding highlight indicator */}
+            <div 
+              ref={billingPillRef}
+              className="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-[#FFC801] rounded-md transition-transform duration-300 ease-in-out pointer-events-none"
+              style={{ transform: billingCycleRef.current === 'monthly' ? 'translateX(0)' : 'translateX(100%)' }}
+            />
             <button
               ref={btnMonthlyRef}
               type="button"
               onClick={() => handleBillingToggle('monthly')}
-              className="rounded-md px-4 py-2 text-xs font-semibold bg-[#FFC801] text-[#172B36] transition-all duration-[150ms] ease-out focus:outline-none"
+              className="relative z-10 flex-1 rounded-md py-2 text-xs font-semibold text-[#172B36] transition-colors duration-[300ms] ease-out focus:outline-none"
             >
               Monthly Billing
             </button>
@@ -176,19 +241,31 @@ export const Pricing = () => {
               ref={btnAnnualRef}
               type="button"
               onClick={() => handleBillingToggle('annual')}
-              className="rounded-md px-4 py-2 text-xs font-semibold text-[#D9E8E2] hover:text-[#F1F6F4] transition-all duration-[150ms] ease-out focus:outline-none"
+              className="relative z-10 flex-1 rounded-md py-2 text-xs font-semibold text-[#D9E8E2] hover:text-[#F1F6F4] transition-colors duration-[300ms] ease-out focus:outline-none"
             >
               Annual Billing (20% off)
             </button>
           </div>
 
           {/* Currency Switcher */}
-          <div className="flex rounded-lg border border-white/5 bg-[#114C5A] p-1">
+          <div className="relative flex rounded-lg border border-white/5 bg-[#114C5A] p-1 w-64 sm:w-72 overflow-hidden">
+            {/* Sliding highlight indicator */}
+            <div 
+              ref={currencyPillRef}
+              className="absolute top-1 bottom-1 left-1 w-[calc(33.333%-4px)] bg-[#FFC801]/10 border border-[#FFC801]/30 rounded-md transition-transform duration-300 ease-in-out pointer-events-none"
+              style={{
+                transform: currencyRef.current === 'USD' 
+                  ? 'translateX(0)' 
+                  : currencyRef.current === 'INR' 
+                  ? 'translateX(100%)' 
+                  : 'translateX(200%)'
+              }}
+            />
             <button
               ref={btnUsdRef}
               type="button"
               onClick={() => handleCurrencyToggle('USD')}
-              className="rounded-md border border-[#FFC801]/30 bg-[#FFC801]/10 px-3.5 py-1.5 text-xs font-semibold text-[#FFC801] transition-all duration-[150ms] ease-out focus:outline-none"
+              className="relative z-10 flex-1 rounded-md py-1.5 text-xs font-semibold text-[#FFC801] transition-colors duration-[300ms] ease-out focus:outline-none"
             >
               USD ($)
             </button>
@@ -196,7 +273,7 @@ export const Pricing = () => {
               ref={btnInrRef}
               type="button"
               onClick={() => handleCurrencyToggle('INR')}
-              className="rounded-md border border-transparent px-3.5 py-1.5 text-xs font-semibold text-[#D9E8E2] hover:text-[#F1F6F4] transition-all duration-[150ms] ease-out focus:outline-none"
+              className="relative z-10 flex-1 rounded-md py-1.5 text-xs font-semibold text-[#D9E8E2] hover:text-[#F1F6F4] transition-colors duration-[300ms] ease-out focus:outline-none"
             >
               INR (₹)
             </button>
@@ -204,7 +281,7 @@ export const Pricing = () => {
               ref={btnEurRef}
               type="button"
               onClick={() => handleCurrencyToggle('EUR')}
-              className="rounded-md border border-transparent px-3.5 py-1.5 text-xs font-semibold text-[#D9E8E2] hover:text-[#F1F6F4] transition-all duration-[150ms] ease-out focus:outline-none"
+              className="relative z-10 flex-1 rounded-md py-1.5 text-xs font-semibold text-[#D9E8E2] hover:text-[#F1F6F4] transition-colors duration-[300ms] ease-out focus:outline-none"
             >
               EUR (€)
             </button>
